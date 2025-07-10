@@ -13,6 +13,7 @@ public class RotateRotators : MonoBehaviour
     private float isClockwise;
 
     public Sinewave sinewave;
+    public Sinewave desiredsine;
 
     private float minAmpl = 0.3f;
     private float maxAmpl = 3f;
@@ -75,7 +76,12 @@ public class RotateRotators : MonoBehaviour
                     {
 
                         sinewave.amplitude += waveChange;
-                    }
+
+                        if (desiredsine.amplitude == sinewave.amplitude && desiredsine.frequency == sinewave.frequency)
+                        {
+                            Application.Quit();
+                        }
+                    }   
                 }
                 else
                 {
@@ -85,6 +91,11 @@ public class RotateRotators : MonoBehaviour
                     {
 
                         sinewave.frequency += waveChange;
+
+                        if (desiredsine.amplitude == sinewave.amplitude && desiredsine.frequency == sinewave.frequency)
+                        {
+                            Application.Quit();
+                        }
                     }
                 }
             }
