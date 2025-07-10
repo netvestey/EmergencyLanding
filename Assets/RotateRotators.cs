@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RotateRotators : MonoBehaviour
 {
@@ -79,7 +80,7 @@ public class RotateRotators : MonoBehaviour
 
                         if (desiredsine.amplitude == sinewave.amplitude && desiredsine.frequency == sinewave.frequency)
                         {
-                            Application.Quit();
+                            SceneManager.LoadScene("VictoryScreen");
                         }
                     }   
                 }
@@ -94,7 +95,7 @@ public class RotateRotators : MonoBehaviour
 
                         if (desiredsine.amplitude == sinewave.amplitude && desiredsine.frequency == sinewave.frequency)
                         {
-                            Application.Quit();
+                            SceneManager.LoadScene("VictoryScreen");
                         }
                     }
                 }
