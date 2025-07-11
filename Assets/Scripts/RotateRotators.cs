@@ -20,8 +20,15 @@ public class RotateRotators : MonoBehaviour
     private float minFreq;
     private float maxFreq;
 
+    private float minPitch;
+    private float maxPitch;
+    private float minRev;
+    private float maxRev;
+
     public bool isAmpl;
     private float progress;
+
+    private AudioSource waveSound;
 
     private void Start()
     {
@@ -33,10 +40,18 @@ public class RotateRotators : MonoBehaviour
         maxAmpl = 5f * sinewave.amplitude;
         minFreq = 0.5f * sinewave.frequency;
         maxFreq = 2f * sinewave.frequency;
+
+        transform.eulerAngles = new Vector3(0, 0, 180f);
+
+        waveSound = sinewave.GetComponent<AudioSource>();
+        minPitch = waveSound.pitch * 0.5f;
+        maxPitch = waveSound.pitch * 2f;
+        minRev = waveSound.reverbZoneMix * 0.5f;
+        maxRev = waveSound.reverbZoneMix * 2f;
     }
 
     private void Update()
-    { 
+    {       
         Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetMouseButtonDown(0))
@@ -46,8 +61,11 @@ public class RotateRotators : MonoBehaviour
                 screenPos = cam.WorldToScreenPoint(transform.position);
                 Vector3 vec3 = Input.mousePosition - screenPos;
                 angleOffset = (Mathf.Atan2(transform.right.y, transform.right.x) - Mathf.Atan2(vec3.y, vec3.x)) * Mathf.Rad2Deg;
+
+                waveSound.Play();
             }
         }
+
         if (Input.GetMouseButton(0))
         {
             if (col == Physics2D.OverlapPoint(mousePos))
@@ -60,13 +78,20 @@ public class RotateRotators : MonoBehaviour
                 if (isAmpl == true)
                 {
                     sinewave.amplitude = Mathf.Lerp(maxAmpl, minAmpl, progress);
+                    waveSound.pitch = Mathf.Lerp(maxPitch, minPitch, progress);
                 }
                 else
                 {
                     sinewave.frequency = Mathf.Lerp(maxFreq, minFreq, progress);
+                    waveSound.reverbZoneMix = Mathf.Lerp(maxRev, minRev, progress);
                 }
             }
         }
+
+        if (Input.GetMouseButtonUp(0))
+            {
+                waveSound.Stop();
+            }
 
         if (sinewave.amplitude > (desiredAmpl * 0.95f) && sinewave.amplitude < (desiredAmpl * 1.05f) && sinewave.frequency > (desiredFreq * 0.95f) && sinewave.frequency < (desiredFreq * 1.05f))
         {
