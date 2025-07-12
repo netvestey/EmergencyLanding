@@ -30,6 +30,13 @@ public class RotateRotators : MonoBehaviour
 
     private AudioSource waveSound;
 
+    public GameObject hintStart;
+    public GameObject hintAmpl;
+    public GameObject hintFreq;
+    public GameObject hintSignal;
+
+    public HintsAppear hintsAppear;
+
     private void Start()
     {
         cam = Camera.main;
@@ -41,13 +48,13 @@ public class RotateRotators : MonoBehaviour
         minFreq = 0.5f * sinewave.frequency;
         maxFreq = 2f * sinewave.frequency;
 
-        transform.eulerAngles = new Vector3(0, 0, 180f);
-
         waveSound = sinewave.GetComponent<AudioSource>();
         minPitch = waveSound.pitch * 0.5f;
         maxPitch = waveSound.pitch * 2f;
         minRev = waveSound.reverbZoneMix * 0.5f;
         maxRev = waveSound.reverbZoneMix * 2f;
+
+        StartCoroutine(HintStart());
     }
 
     private void Update()
@@ -79,11 +86,23 @@ public class RotateRotators : MonoBehaviour
                 {
                     sinewave.amplitude = Mathf.Lerp(maxAmpl, minAmpl, progress);
                     waveSound.pitch = Mathf.Lerp(maxPitch, minPitch, progress);
+
+                    if (hintsAppear.seenAmpl == false)
+                    {
+                        StartCoroutine(HintAmpl());
+                        hintsAppear.seenAmpl = true;
+                    }
                 }
                 else
                 {
                     sinewave.frequency = Mathf.Lerp(maxFreq, minFreq, progress);
                     waveSound.reverbZoneMix = Mathf.Lerp(maxRev, minRev, progress);
+
+                    if (hintsAppear.seenFreq == false)
+                    {
+                        StartCoroutine(HintFreq());
+                        hintsAppear.seenFreq = true;
+                    }
                 }
             }
         }
@@ -98,5 +117,51 @@ public class RotateRotators : MonoBehaviour
             SceneManager.LoadScene("VictoryScreen");
         }
 
+        if (hintsAppear.seenFreq == true && hintsAppear.seenAmpl == true && hintsAppear.seenSignal == false)
+        {
+            StartCoroutine(HintSignal());
+            hintsAppear.seenSignal = true;
+        }
+
+    }
+
+    IEnumerator HintStart()
+    {
+        yield return new WaitForSeconds(3);
+
+        hintStart.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        hintStart.SetActive(false);
+    }
+
+    IEnumerator HintAmpl()
+    {
+        hintAmpl.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        hintAmpl.SetActive(false);
+    }
+
+    IEnumerator HintFreq()
+    {
+        hintFreq.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        hintFreq.SetActive(false);
+    }
+
+    IEnumerator HintSignal()
+    {
+        yield return new WaitForSeconds(7);
+
+        hintSignal.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        hintSignal.SetActive(false);
     }
 }
