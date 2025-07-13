@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
+
 
 public class RotateRotators : MonoBehaviour
 {
@@ -31,13 +33,22 @@ public class RotateRotators : MonoBehaviour
     private AudioSource waveSound;
     public GameObject soundVictory;
     private AudioSource victorySound;
+    public GameObject soundHints;
+    private AudioSource hintsSound; 
 
     public GameObject hintStart;
     public GameObject hintAmpl;
     public GameObject hintFreq;
     public GameObject hintSignal;
+    public GameObject leftArrow;
+    public GameObject rightArrow; 
 
     public HintsAppear hintsAppear;
+    private bool signalAdded = false;
+
+    public float totalSeconds;  
+    public float maxInt;  
+    public UnityEngine.Rendering.Universal.Light2D coolLight;
 
     private void Start()
     {
@@ -52,18 +63,20 @@ public class RotateRotators : MonoBehaviour
 
         waveSound = sinewave.GetComponent<AudioSource>();
         victorySound = soundVictory.GetComponent<AudioSource>();
+        hintsSound = soundHints.GetComponent<AudioSource>();
         minPitch = waveSound.pitch * 0.5f;
         maxPitch = waveSound.pitch * 2f;
         minRev = waveSound.reverbZoneMix * 0.5f;
         maxRev = waveSound.reverbZoneMix * 2f;
 
-        StartCoroutine(HintStart());
+        hintStart.SetActive(true);
+        hintsSound.Play();
 
-}
+        //StartCoroutine(FlashLight());
+    }
 
     private void Update()
     {
-
         Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetMouseButtonDown(0))
@@ -99,8 +112,20 @@ public class RotateRotators : MonoBehaviour
 
                     if (hintsAppear.seenAmpl == false)
                     {
-                        StartCoroutine(HintAmpl());
+                        for (int i = 0; i < hintsAppear.hintsSpawned.Count; i++)
+                        {
+                            if (hintsAppear.hintsSpawned[i].activeInHierarchy)
+                            {
+                                hintsAppear.hintsSpawned[i].SetActive(false);
+                                break;
+                            }
+                        }
+                        hintAmpl.SetActive(true);
+                        leftArrow.SetActive(true);
+                        rightArrow.SetActive(true);
+                        hintsSound.Play();
                         hintsAppear.seenAmpl = true;
+                        hintsAppear.hintsSpawned.Add(hintAmpl);
                     }
                 }
                 else
@@ -110,8 +135,20 @@ public class RotateRotators : MonoBehaviour
 
                     if (hintsAppear.seenFreq == false)
                     {
-                        StartCoroutine(HintFreq());
+                        for (int i = 0; i < hintsAppear.hintsSpawned.Count; i++)
+                        {
+                                if (hintsAppear.hintsSpawned[i].activeInHierarchy)
+                                {
+                                    hintsAppear.hintsSpawned[i].SetActive(false);
+                                    break;
+                                }
+                        }
+                        hintFreq.SetActive(true);
+                        leftArrow.SetActive(true);
+                        rightArrow.SetActive(true);
+                        hintsSound.Play();
                         hintsAppear.seenFreq = true;
+                        hintsAppear.hintsSpawned.Add(hintFreq);
                     }
                 }
             }
@@ -129,46 +166,11 @@ public class RotateRotators : MonoBehaviour
 
         if (hintsAppear.seenFreq == true && hintsAppear.seenAmpl == true && hintsAppear.seenSignal == false)
         {
-            StartCoroutine(HintSignal());
-            hintsAppear.seenSignal = true;
+            StartCoroutine(Signal());
         }
 
-    }
-
-    IEnumerator HintStart()
-    {
-        yield return new WaitForSeconds(3);
-
-        hintStart.SetActive(true);
-
-        yield return new WaitForSeconds(10);
-
-        hintStart.SetActive(false);
-    }
-
-    IEnumerator HintAmpl()
-    {
-        yield return new WaitForSeconds(0.3f);
-
-        hintAmpl.SetActive(true);
-    }
-
-    IEnumerator HintFreq()
-    {
-        yield return new WaitForSeconds(0.3f);
-
-        hintFreq.SetActive(true);
-    }
-
-    IEnumerator HintSignal()
-    {
-        yield return new WaitForSeconds(7);
-
-        hintSignal.SetActive(true);
-
-        yield return new WaitForSeconds(5);
-
-        hintSignal.SetActive(false);
+        float howClose = ((sinewave.amplitude / desiredAmpl) + (sinewave.frequency / desiredFreq) / 2);
+        coolLight.intensity = Mathf.Lerp(maxInt, 0, howClose);
     }
 
     IEnumerator Victory()
@@ -177,5 +179,44 @@ public class RotateRotators : MonoBehaviour
         victorySound.Play();
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    IEnumerator FlashLight()
+    {
+        float waitTime = totalSeconds / 2;
+
+        while (coolLight.intensity < maxInt)
+        {
+            coolLight.intensity += Time.deltaTime / waitTime;     
+            yield return null;
+        }
+        while (coolLight.intensity > 0)
+        {
+            coolLight.intensity -= Time.deltaTime / waitTime;     
+            yield return null;
+        }
+        yield return null;
+    }
+
+    IEnumerator Signal()
+    {
+        yield return new WaitForSeconds(7);
+            for (int i = 0; i < hintsAppear.hintsSpawned.Count; i++)
+            {
+                if (hintsAppear.hintsSpawned[i].activeInHierarchy)
+                {
+                hintsAppear.hintsSpawned[i].SetActive(false);
+                    break;
+                }
+            }
+        hintSignal.SetActive(true);
+        hintsSound.Play();
+        hintsAppear.seenSignal = true;
+
+        if (signalAdded == false)
+        {
+            hintsAppear.hintsSpawned.Add(hintSignal);
+            signalAdded = true;
+        }
     }
 }

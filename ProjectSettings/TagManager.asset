@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Shader
   - 
   - 
   - 
@@ -43,4 +43,7 @@ TagManager:
     locked: 0
   - name: Sprites
     uniqueID: 1003170225
+    locked: 0
+  - name: Lamp
+    uniqueID: 953995727
     locked: 0
