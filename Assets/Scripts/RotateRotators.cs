@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
-
 public class RotateRotators : MonoBehaviour
 {
     private Camera cam;
@@ -76,7 +75,7 @@ public class RotateRotators : MonoBehaviour
     }
 
     private void Update()
-    {
+    {        
         Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetMouseButtonDown(0))
