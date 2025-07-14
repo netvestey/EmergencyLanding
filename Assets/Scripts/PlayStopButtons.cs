@@ -9,4 +9,9 @@ public class StartMenu : MonoBehaviour
     {
         SceneManager.LoadScene("PlayingLevel");
     }
+
+    public void BackToStart()
+    {
+        SceneManager.LoadScene("StartScreen");
+    }
 }
