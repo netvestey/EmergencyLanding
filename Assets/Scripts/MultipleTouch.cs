@@ -21,17 +21,28 @@ public class MultipleTouch : MonoBehaviour
             if (t.phase == TouchPhase.Began)
             {
                 Debug.Log("touch began");
+                touches.Add(new TouchLocation(t.fingerId, createCircle(t)));
             }
             else if (t.phase == TouchPhase.Ended)
             {
                 Debug.Log("touch ended");
             }
+
             else if (t.phase == TouchPhase.Moved)
             {
                 Debug.Log("touch moved");
             }
             ++n;
         }
+
+    }
+
+    GameObject createCircle (Touch t)
+    {
+        GameObject c = Instantiate (circle) as GameObject;
+        c.name = "Touch" + t.fingerId;
+      
+        return c;
     }
 
 }
