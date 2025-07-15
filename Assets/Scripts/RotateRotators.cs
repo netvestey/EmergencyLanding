@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.UI;
 
 public class RotateRotators : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class RotateRotators : MonoBehaviour
     private float minRev;
     private float maxRev;
 
-    public bool isAmpl;
+    [SerializeField] bool isAmpl;
     private float progress;
 
     private AudioSource waveSound;
@@ -39,8 +40,14 @@ public class RotateRotators : MonoBehaviour
     public GameObject hintAmpl;
     public GameObject hintFreq;
     public GameObject hintSignal;
-    public GameObject leftArrow;
-    public GameObject rightArrow; 
+    public Button leftArrow;
+    public Button rightArrow;
+    public GameObject arrows;
+
+    public GameObject victoryCanvas;
+    public GameObject lastCanvas;
+    [SerializeField] private bool isLastLevel;
+    [SerializeField] private bool isFirstLevel;
 
     public HintsAppear hintsAppear;
     private bool signalAdded = false;
@@ -57,7 +64,7 @@ public class RotateRotators : MonoBehaviour
         desiredFreq = desiredsine.frequency;
         minAmpl = 0.1f;
         maxAmpl = 2;
-        minFreq = 1;
+        minFreq = 0.5f;
         maxFreq = 15;
 
         waveSound = sinewave.GetComponent<AudioSource>();
@@ -70,6 +77,17 @@ public class RotateRotators : MonoBehaviour
 
         hintStart.SetActive(true);
         hintsSound.Play();
+
+        if (!isFirstLevel)
+        {
+            hintsAppear.seenFreq = true;
+            hintsAppear.seenAmpl = true;
+            hintsAppear.seenSignal = true;
+            arrows.SetActive(true);
+            hintsAppear.hintsSpawned.Add(hintAmpl);
+            hintsAppear.hintsSpawned.Add(hintFreq);
+            hintsAppear.hintsSpawned.Add(hintSignal);
+        }
 
         //StartCoroutine(FlashLight());
     }
@@ -101,9 +119,6 @@ public class RotateRotators : MonoBehaviour
 
                 progress = Mathf.PingPong(progress, 1);
 
-
-                print(progress);
-
                 if (isAmpl == true)
                 {
                     sinewave.amplitude = Mathf.Lerp(minAmpl, maxAmpl, progress);
@@ -120,8 +135,7 @@ public class RotateRotators : MonoBehaviour
                             }
                         }
                         hintAmpl.SetActive(true);
-                        leftArrow.SetActive(true);
-                        rightArrow.SetActive(true);
+                        arrows.SetActive(true);
                         hintsSound.Play();
                         hintsAppear.seenAmpl = true;
                         hintsAppear.hintsSpawned.Add(hintAmpl);
@@ -143,8 +157,7 @@ public class RotateRotators : MonoBehaviour
                                 }
                         }
                         hintFreq.SetActive(true);
-                        leftArrow.SetActive(true);
-                        rightArrow.SetActive(true);
+                        arrows.SetActive(true);
                         hintsSound.Play();
                         hintsAppear.seenFreq = true;
                         hintsAppear.hintsSpawned.Add(hintFreq);
@@ -158,9 +171,23 @@ public class RotateRotators : MonoBehaviour
                 waveSound.Stop();
             }
 
-        if (sinewave.amplitude > (desiredAmpl * 0.8f) && sinewave.amplitude < (desiredAmpl * 1.2f) && sinewave.frequency > (desiredFreq * 0.8f) && sinewave.frequency < (desiredFreq * 1.2f))
+        if (sinewave.amplitude > (desiredAmpl - 0.2f) && sinewave.amplitude < (desiredAmpl + 0.2f) && sinewave.frequency > (desiredFreq - 2f) && sinewave.frequency < (desiredFreq + 2f))
         {
-            StartCoroutine(Victory());
+            Debug.Log("victory");
+            
+            col = null;
+            leftArrow.enabled = false;
+            rightArrow.enabled = false;
+
+            if (!isLastLevel)
+            {
+                victoryCanvas.SetActive(true);
+            }    
+            else
+            {
+                lastCanvas.SetActive(true);
+            }
+
         }
 
         if (hintsAppear.seenFreq == true && hintsAppear.seenAmpl == true && hintsAppear.seenSignal == false)
@@ -171,15 +198,6 @@ public class RotateRotators : MonoBehaviour
         float howClose = ((sinewave.amplitude / desiredAmpl) + (sinewave.frequency / desiredFreq) / 2);
         coolLight.intensity = Mathf.Lerp(maxInt, 0, howClose);
     }
-
-    IEnumerator Victory()
-    {
-        col = null;
-        victorySound.Play();
-        yield return new WaitForSeconds(3);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
     IEnumerator FlashLight()
     {
         float waitTime = totalSeconds / 2;

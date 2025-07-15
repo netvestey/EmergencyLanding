@@ -2043,6 +2043,7 @@ MonoBehaviour:
   victoryCanvas: {fileID: 1062151122}
   lastCanvas: {fileID: 346303725}
   isLastLevel: 0
+  isFirstLevel: 0
   hintsAppear: {fileID: 1874616014}
   totalSeconds: 5
   maxInt: 100
@@ -2971,6 +2972,7 @@ MonoBehaviour:
   victoryCanvas: {fileID: 1062151122}
   lastCanvas: {fileID: 346303725}
   isLastLevel: 0
+  isFirstLevel: 0
   hintsAppear: {fileID: 1874616014}
   totalSeconds: 5
   maxInt: 100
@@ -3194,8 +3196,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coolLine: {fileID: 884146678}
   points: 1000
-  amplitude: 0.5
-  frequency: 0.5
+  amplitude: 1.5
+  frequency: 2
   xLimits: {x: -15, y: 5}
   movementSpeed: 5
 --- !u!120 &884146678
@@ -6890,8 +6892,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coolLine: {fileID: 1701005983}
   points: 1000
-  amplitude: 1.5
-  frequency: 15
+  amplitude: 0.8
+  frequency: 7
   xLimits: {x: -15, y: 5}
   movementSpeed: 5
 --- !u!1 &1710288371
