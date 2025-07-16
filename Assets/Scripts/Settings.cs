@@ -5,10 +5,11 @@ using UnityEngine;
 public class Settings: MonoBehaviour
 
 {
+    public HintsAppear hintsAppear;
+    public bool isFirstLevel;
     void Start()
     {
         Screen.SetResolution(3840, 2160, true);
-        Time.timeScale = 1;
     }
 
     void Update()

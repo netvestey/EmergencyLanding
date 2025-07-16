@@ -7,15 +7,13 @@ using UnityEngine.UI;
 public class StartMenu : MonoBehaviour
 {
     public GameObject homeButtonCanvas;
-    public Button leftArrow;
-    public Button rightArrow;
+    public HintsAppear hintsAppear;
     public GameObject buttonS;
     private AudioSource buttonSound;
 
     private void Start()
     {
         buttonSound = buttonS.GetComponent<AudioSource>();
-
     }
 
     public void Play()
@@ -39,17 +37,13 @@ public class StartMenu : MonoBehaviour
     {
         buttonSound.Play();
         homeButtonCanvas.SetActive(true);
-        Time.timeScale = 0;
-        leftArrow.enabled = false;
-        rightArrow.enabled = false;
+        hintsAppear.isPaused = true;
     }
         public void HomeButtonDeactivate()
     {
         buttonSound.Play();
         homeButtonCanvas.SetActive(false);
-        Time.timeScale = 1;
-        leftArrow.enabled = true;
-        rightArrow.enabled = true;
+        hintsAppear.isPaused = false;
     }
 
 }
