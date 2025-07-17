@@ -11,6 +11,8 @@ public class Sinewave: MonoBehaviour
     public Vector2 xLimits = new Vector2(0, 1);
     public float movementSpeed = 1;
 
+    public Settings settings;
+
     void Start()
     {
         coolLine = GetComponent<LineRenderer>();
@@ -34,7 +36,10 @@ public class Sinewave: MonoBehaviour
     }
 
     void Update()
-    {
-        Draw();
+    { 
+        if (settings.isLevelStart && !settings.isLevelWon)
+        {
+            Draw();
+        }
     }
 }
