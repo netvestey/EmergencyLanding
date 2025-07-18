@@ -11,6 +11,7 @@ public class Settings: MonoBehaviour
     public bool isLevelStart;
     public bool isFirstLevel;
     public bool isLastLevel;
+    public bool isVideoPlaying;
     void Start()
     {
         Screen.SetResolution(3840, 2160, true);        

@@ -122,6 +122,88 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &35071316
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1777014788149756825, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_Name
+      value: Finger
+      objectReference: {fileID: 0}
+    - target: {fileID: 1777014788149756825, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841355834479015597, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+--- !u!1 &35071317 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1777014788149756825, guid: 9b0e1e40ebe55464aa728543967893f1, type: 3}
+  m_PrefabInstance: {fileID: 35071316}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &163262668
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VideoPlayer: {fileID: 173836541}
   trans: {fileID: 1946871017}
+  settings: {fileID: 1946871015}
   sound: {fileID: 1321660583}
 --- !u!328 &173836541
 VideoPlayer:
@@ -3695,6 +3778,7 @@ GameObject:
   - component: {fileID: 1946871016}
   - component: {fileID: 1946871015}
   - component: {fileID: 1946871017}
+  - component: {fileID: 1946871018}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Untagged
@@ -3720,6 +3804,7 @@ MonoBehaviour:
   isLevelStart: 1
   isFirstLevel: 0
   isLastLevel: 0
+  isVideoPlaying: 0
 --- !u!4 &1946871016
 Transform:
   m_ObjectHideFlags: 0
@@ -3750,6 +3835,20 @@ MonoBehaviour:
   settings: {fileID: 1946871015}
   image: {fileID: 951110226}
   buttonSound: {fileID: 1518346843}
+--- !u!114 &1946871018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946871014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2502eccb9dc81274f9ef0134740e3e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finger: {fileID: 35071317}
+  settings: {fileID: 1946871015}
 --- !u!1 &1958812335
 GameObject:
   m_ObjectHideFlags: 0
@@ -3949,3 +4048,4 @@ SceneRoots:
   - {fileID: 951110225}
   - {fileID: 173836542}
   - {fileID: 1582517382}
+  - {fileID: 35071316}

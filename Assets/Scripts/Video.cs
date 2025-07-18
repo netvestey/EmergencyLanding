@@ -9,6 +9,7 @@ public class Video : MonoBehaviour
 {
     public VideoPlayer VideoPlayer;
     public ButtonScript trans;
+    public Settings settings;
 
     public AudioSource sound;
 
@@ -27,6 +28,7 @@ public class Video : MonoBehaviour
     {
         sound.GetComponent<AudioSource>().Stop();
         VideoPlayer.Play();
+        settings.isVideoPlaying = true;
     }
 }
     
