@@ -30,7 +30,7 @@ public class Rotators : MonoBehaviour
     public GameObject sounds;
     private AudioSource waveSound;
 
-    public Canvas canvas;
+    public CanvasScript canvas;
     public Hints hints;
 
     public Settings settings;
@@ -129,7 +129,7 @@ public class Rotators : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0) && !settings.isPaused)
+        if (Input.GetMouseButtonUp(0))
         {
             waveSound.Stop();
         }

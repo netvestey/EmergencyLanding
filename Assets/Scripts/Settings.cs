@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Settings: MonoBehaviour
 
 {
     public bool isPaused;
     public bool isLevelWon;
+    public bool isGameWon;
     public bool isLevelStart;
     public bool isFirstLevel;
-    public GameObject[] loadAtStart;
-      
+    public bool isLastLevel;
     void Start()
     {
         Screen.SetResolution(3840, 2160, true);        

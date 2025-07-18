@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Xml;
 using TMPro;
+using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Hints : MonoBehaviour
@@ -10,36 +13,17 @@ public class Hints : MonoBehaviour
 
     public List<GameObject> spawned = new List<GameObject>();
     public GameObject arrows;
-    public GameObject signal;
     public GameObject ampl;
     public GameObject freq;
 
-    [SerializeField] private bool isLastLevel;
-    [SerializeField] private bool isFirstLevel;
-
     private void Update()
-    {
-        if (settings.isLevelStart)
+    {      
+        if (settings.isLevelStart && !settings.isFirstLevel)
         {
-            if (!isFirstLevel)
-            {
-                foreach (GameObject hint in GameObject.FindGameObjectsWithTag("Hint"))
-                {
-                        if (!spawned.Contains(hint))
-                        {
-                        spawned.Add(hint);
-                        }
-                    break;
-                }
-                arrows.SetActive(true);
-            }
-            else if (!spawned.Contains(signal))
-            {
-                signal.SetActive(true);
-                spawned.Add(signal);
-            }
+            arrows.SetActive(true);
         }
-
+        
+        
         if (settings.isLevelWon)
         {
             for (int i = 0; i < spawned.Count; i++)
@@ -49,11 +33,13 @@ public class Hints : MonoBehaviour
                     spawned[i].SetActive(false);
                 }
             }
+
+            arrows.SetActive(false);
         }
     }
 
     public void SwitchLeft()
-    {
+    {   
         if (!settings.isPaused)
         {
              for (int i = 0; i < spawned.Count; i++)

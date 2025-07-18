@@ -6,9 +6,6 @@ public class Titles : MonoBehaviour
 {
     public Settings settings;
 
-    public GameObject buttonSound;
-    private AudioSource button;
-
     public GameObject clockText;
     public GameObject towerText;
     public GameObject buttonText;
@@ -18,19 +15,17 @@ public class Titles : MonoBehaviour
 
     private void Start()
     {
-        button = buttonSound.GetComponent<AudioSource>();
+        //foreach (GameObject titlesT in GameObject.FindGameObjectsWithTag("TitlesText"))
+        //{
 
-        foreach (GameObject titlesT in GameObject.FindGameObjectsWithTag("TitlesText"))
-        {
-
-            titlesText.Add(titlesT);
-        }
+            //titlesText.Add(titlesT);
+            //titlesT.SetActive(false);
+        //}
 
     }
 
     public void GoToClockText()
     {
-        button.Play();
         for (int i = 0; i < titlesText.Count; i++)
         {
             if (titlesText[i].activeInHierarchy)
@@ -43,7 +38,6 @@ public class Titles : MonoBehaviour
 
     public void GoToTowerText()
     {
-        button.Play();
         for (int i = 0; i < titlesText.Count; i++)
         {
             if (titlesText[i].activeInHierarchy)
@@ -56,7 +50,6 @@ public class Titles : MonoBehaviour
 
     public void GoToButtonText()
     {
-        button.Play();
         for (int i = 0; i < titlesText.Count; i++)
         {
             if (titlesText[i].activeInHierarchy)
@@ -69,7 +62,6 @@ public class Titles : MonoBehaviour
 
     public void GoToHeadphonesText()
     {
-        button.Play();
         for (int i = 0; i < titlesText.Count; i++)
         {
             if (titlesText[i].activeInHierarchy)
