@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Finger : MonoBehaviour
     
@@ -13,18 +11,20 @@ public class Finger : MonoBehaviour
 
     void Update()
     {
-        inputTimer += Time.deltaTime;
+        if (!settings.isPaused)
+            inputTimer += Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0) || settings.isVideoPlaying)
+        if (Input.GetMouseButtonDown(0))
         {
             inputTimer = 0;
             finger.SetActive(false);
+            isPlaying = true; 
         }
 
         if (inputTimer >= 5f && !isPlaying && !settings.isPaused)
         {
-            StartCoroutine(TappingFinger());
             isPlaying = true;
+            StartCoroutine(TappingFinger());
         }
 
         else if (inputTimer >= 31f)

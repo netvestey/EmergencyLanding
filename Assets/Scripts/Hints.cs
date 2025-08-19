@@ -1,85 +1,51 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Xml;
 using TMPro;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Hints : MonoBehaviour
 {
     public Settings settings;
 
-    public List<GameObject> spawned = new List<GameObject>();
+    public TMP_Text _text;
+    public string signal;
+    public string ampl;
+    public string freq;
+    public List<string> spawned = new(3);
+
     public GameObject arrows;
-    public GameObject ampl;
-    public GameObject freq;
 
-    private void Update()
-    {      
-        if (settings.isLevelStart && !settings.isFirstLevel)
-        {
-            arrows.SetActive(true);
-        }
-        
-        
-        if (settings.isLevelWon)
-        {
-            for (int i = 0; i < spawned.Count; i++)
-            {
-                if (spawned[i].activeInHierarchy)
-                {
-                    spawned[i].SetActive(false);
-                }
-            }
-
-            arrows.SetActive(false);
-        }
+    private void Start()
+    {
+        signal = "Сделайте <color=#313fa5> синюю</color> волну такой <br>же, как <color=#a06900>оранжевая</color>!";
+        ampl = "Высота волны — это амплитуда. <br>Она обозначает отклонение <br>от среднего значения волны.";
+        freq = "Ширина волны — это частота. <br>Она обозначает количество колебаний электромагнитного <br>поля в секунду.";
     }
-
     public void SwitchLeft()
-    {   
-        if (!settings.isPaused)
+    {
+        for (int i = 0; i < spawned.Count; ++i)
         {
-             for (int i = 0; i < spawned.Count; i++)
+            if (_text.text == spawned[i])
             {
-                if (spawned[i].activeInHierarchy)
-                {
-                    spawned[i].SetActive(false);
-                    if (spawned[i] != spawned[0])
-                    {
-                       spawned[i - 1].SetActive(true);
-                    }
-                    else
-                    {
-                        spawned[spawned.Count - 1].SetActive(true);
-                    }
-                    break;
-                }
+                if (i != 0)
+                    _text.text = spawned[--i];
+                else
+                    _text.text = spawned[^1];
+                break;
             }
-        }   
+        }
     }
 
     public void SwitchRight()
     {
-        if (!settings.isPaused)
+        for (int i = 0; i < spawned.Count; ++i)
         {
-            for (int i = 0; i < spawned.Count; i++)
+            if (_text.text == spawned[i])
             {
-                if (spawned[i].activeInHierarchy)
-                {
-                    spawned[i].SetActive(false);
-                    if (spawned[i] != spawned[spawned.Count - 1])
-                    {
-                        spawned[i + 1].SetActive(true);
-                    }
-                    else
-                    {
-                        spawned[0].SetActive(true);
-                    }
-                    break;
-                }
+                if (i != (spawned.Count - 1))
+                    _text.text = spawned[++i];
+                else
+                    _text.text = spawned[0];
+                break;
             }
         }
     }

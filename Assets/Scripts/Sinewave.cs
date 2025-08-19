@@ -1,17 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Sinewave: MonoBehaviour
+public class Sinewave : MonoBehaviour
 {
     public LineRenderer coolLine;
     public int points;
     public float amplitude = 1;
     public float frequency = 1;
-    public Vector2 xLimits = new Vector2(0, 1);
+    public Vector2 xLimits = new(0, 1);
     public float movementSpeed = 1;
-
-    public Settings settings;
 
     void Start()
     {
@@ -36,10 +32,7 @@ public class Sinewave: MonoBehaviour
     }
 
     void Update()
-    { 
-        if (settings.isLevelStart && !settings.isLevelWon)
-        {
-            Draw();
-        }
+    {
+        Draw();
     }
 }

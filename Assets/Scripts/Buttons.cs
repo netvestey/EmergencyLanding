@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ButtonScript : MonoBehaviour
+public class Buttons : MonoBehaviour
 {
     public Settings settings;
     [SerializeField] private Image image;
@@ -26,16 +25,6 @@ public class ButtonScript : MonoBehaviour
     public void Sound()
     {
         button.Play();
-    }
-
-    public void Play()
-    {
-        void Finished()
-        {
-            SceneManager.LoadScene("PlayingLevel");
-        }
-
-        StartCoroutine(ChangeAlpha(0.2f, 1, Finished));
     }
 
     public void Exit()

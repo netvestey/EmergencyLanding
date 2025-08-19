@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Rotators : MonoBehaviour
@@ -30,7 +29,7 @@ public class Rotators : MonoBehaviour
     public GameObject sounds;
     private AudioSource waveSound;
 
-    public CanvasScript canvas;
+    public Messages messages;
     public Hints hints;
 
     public Settings settings;
@@ -52,14 +51,6 @@ public class Rotators : MonoBehaviour
 
     private void Update()
     {
-        //for (int t = 0; t < Input.touchCount; t++)
-        {
-            //Vector3 touchPosition = cam.ScreenToWorldPoint(Input.touches[t].position);
-            //UnityEngine.Touch touch = Input.GetTouch(t);
-            //Vector3 touchPos = cam.WorldToScreenPoint(touch.position);
-            //touchPos.z = 0f;
-        }
-
         Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetMouseButtonDown(0) && !settings.isPaused)
@@ -92,15 +83,7 @@ public class Rotators : MonoBehaviour
 
                     if (!hints.spawned.Contains(hints.ampl))
                     {
-                        for (int i = 0; i < hints.spawned.Count; i++)
-                        {
-                            if (hints.spawned[i].activeInHierarchy)
-                            {
-                                hints.spawned[i].SetActive(false);
-                                break;
-                            }
-                        }
-                        hints.ampl.SetActive(true);
+                        hints._text.text = hints.ampl;
                         hints.arrows.SetActive(true);
                         hints.spawned.Add(hints.ampl);
                     }
@@ -113,15 +96,7 @@ public class Rotators : MonoBehaviour
 
                     if (!hints.spawned.Contains(hints.freq))
                     {
-                        for (int i = 0; i < hints.spawned.Count; i++)
-                        {
-                            if (hints.spawned[i].activeInHierarchy)
-                            {
-                                hints.spawned[i].SetActive(false);
-                                break;
-                            }
-                        }
-                        hints.freq.SetActive(true);
+                        hints._text.text = hints.freq;
                         hints.arrows.SetActive(true);
                         hints.spawned.Add(hints.freq);
                     }
@@ -130,16 +105,17 @@ public class Rotators : MonoBehaviour
         }
 
         if (Input.GetMouseButtonUp(0))
-        {
             waveSound.Stop();
-        }
 
         if (sinewave.amplitude > (desiredAmpl - 0.1f) && sinewave.amplitude < (desiredAmpl + 0.1f) && sinewave.frequency > (desiredFreq - 1f) && sinewave.frequency < (desiredFreq + 1f))
         {
+            if (settings.isLastLevel)
+                settings.isGameWon = true;
+
             StartCoroutine(HasWon());
         }
     }
-        
+
     IEnumerator HasWon()
     {
         settings.isPaused = true;
@@ -149,10 +125,10 @@ public class Rotators : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        if(!settings.isLevelWon)
+        if (settings.isUIVisible)
         {
-            settings.isLevelWon = true;
-            canvas.ShowTextCanvas();
+            messages.ShowMessage();
+            settings.isUIVisible = false;
         }
     }
 }
