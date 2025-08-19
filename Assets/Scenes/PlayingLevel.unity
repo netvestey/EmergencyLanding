@@ -315,7 +315,7 @@ MonoBehaviour:
   isPaused: 1
   isUIVisible: 0
   isGameWon: 0
-  isLevelStart: 0
+  isLevelStart: 1
   isFirstLevel: 1
   isLastLevel: 0
 --- !u!4 &214743020
@@ -892,7 +892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 214743019}
-  pause: {fileID: 0}
+  pause: {fileID: 214743024}
   trans: {fileID: 214743025}
   message: {fileID: 1493235447}
   fadeout: {fileID: 125329783}
@@ -1088,7 +1088,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1069591993
 Transform:
   m_ObjectHideFlags: 0

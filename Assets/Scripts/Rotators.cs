@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 public class Rotators : MonoBehaviour
-{
+{   
     private Camera cam;
     private Vector3 screenPos;
     private float angleOffset;
@@ -47,6 +47,7 @@ public class Rotators : MonoBehaviour
         maxPitch = waveSound.pitch * 2f;
         minRev = waveSound.reverbZoneMix * 0.5f;
         maxRev = waveSound.reverbZoneMix * 2f;
+
     }
 
     private void Update()
