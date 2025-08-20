@@ -52,7 +52,7 @@ public class Finger : MonoBehaviour
     IEnumerator RotatingFinger()
     {
         finger.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2.5f);
         finger.SetActive(false);
     }
 
