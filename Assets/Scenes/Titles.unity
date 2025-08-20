@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 286979269}
   - component: {fileID: 286979272}
   - component: {fileID: 286979273}
+  - component: {fileID: 286979274}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Untagged
@@ -399,12 +400,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
-  isLevelWon: 0
+  isUIVisible: 0
   isGameWon: 0
   isLevelStart: 1
   isFirstLevel: 0
   isLastLevel: 0
-  isVideoPlaying: 0
 --- !u!114 &286979270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,6 +461,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finger: {fileID: 329241398}
   settings: {fileID: 286979269}
+--- !u!114 &286979274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286979266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6fb7829593c1e34e8718e9336e4f801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 1.2
+  _text: {fileID: 191187556}
+  _images:
+  - {fileID: 1697796978}
+  - {fileID: 341905724}
+  - {fileID: 494758292}
+  beigeSprites:
+  - {fileID: 21300000, guid: 21b3323974685934c90a4b199829678b, type: 3}
+  - {fileID: 21300000, guid: 867e36962f627214991e1f77e761a041, type: 3}
+  - {fileID: 21300000, guid: f223e9e15767086418b06b712baa09d2, type: 3}
+  blueSprites:
+  - {fileID: 21300000, guid: 11c9c6edf1cacdb429dc5403bfe3800d, type: 3}
+  - {fileID: 21300000, guid: 0cc3f16969a33bb4298b50c1422b79e5, type: 3}
+  - {fileID: 21300000, guid: d1d2cd248cb6b244eb0857090f677d68, type: 3}
 --- !u!1001 &329241397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -638,8 +664,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1421055725}
-        m_TargetAssemblyTypeName: TextSetter, Assembly-CSharp
+      - m_Target: {fileID: 286979274}
+        m_TargetAssemblyTypeName: Titles, Assembly-CSharp
         m_MethodName: Buttons
         m_Mode: 1
         m_Arguments:
@@ -1066,8 +1092,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1421055725}
-        m_TargetAssemblyTypeName: TextSetter, Assembly-CSharp
+      - m_Target: {fileID: 286979274}
+        m_TargetAssemblyTypeName: Titles, Assembly-CSharp
         m_MethodName: Headphones
         m_Mode: 1
         m_Arguments:
@@ -2064,7 +2090,6 @@ GameObject:
   - component: {fileID: 1421055723}
   - component: {fileID: 1421055724}
   - component: {fileID: 1421055726}
-  - component: {fileID: 1421055725}
   - component: {fileID: 1421055728}
   - component: {fileID: 1421055727}
   m_Layer: 0
@@ -2146,32 +2171,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1421055725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1421055722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66718b557d864e945a99ae74e5503f66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scale: 1.2
-  _text: {fileID: 191187556}
-  _images:
-  - {fileID: 1697796978}
-  - {fileID: 341905724}
-  - {fileID: 494758292}
-  beigeSprites:
-  - {fileID: 21300000, guid: 21b3323974685934c90a4b199829678b, type: 3}
-  - {fileID: 21300000, guid: 867e36962f627214991e1f77e761a041, type: 3}
-  - {fileID: 21300000, guid: f223e9e15767086418b06b712baa09d2, type: 3}
-  blueSprites:
-  - {fileID: 21300000, guid: 11c9c6edf1cacdb429dc5403bfe3800d, type: 3}
-  - {fileID: 21300000, guid: 0cc3f16969a33bb4298b50c1422b79e5, type: 3}
-  - {fileID: 21300000, guid: d1d2cd248cb6b244eb0857090f677d68, type: 3}
 --- !u!114 &1421055726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2546,8 +2545,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1421055725}
-        m_TargetAssemblyTypeName: TextSetter, Assembly-CSharp
+      - m_Target: {fileID: 286979274}
+        m_TargetAssemblyTypeName: Titles, Assembly-CSharp
         m_MethodName: Apparatus
         m_Mode: 1
         m_Arguments:

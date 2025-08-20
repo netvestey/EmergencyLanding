@@ -2,11 +2,11 @@ using System.Collections;
 using UnityEngine;
 
 public class Finger : MonoBehaviour
-    
+
 {
     public GameObject finger;
     private float inputTimer;
-    private bool isPlaying = false;
+    private bool isPlaying;
     public Settings settings;
 
     void Update()
@@ -14,22 +14,28 @@ public class Finger : MonoBehaviour
         if (!settings.isPaused)
             inputTimer += Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !settings.isPaused)
         {
             inputTimer = 0;
             finger.SetActive(false);
-            isPlaying = true; 
+            isPlaying = true;
         }
 
         if (inputTimer >= 5f && !isPlaying && !settings.isPaused)
         {
             isPlaying = true;
-            StartCoroutine(TappingFinger());
+            if (settings.isFirstLevel)
+                StartCoroutine(TappingFinger());
+            else
+                StartCoroutine(RotatingFinger());
         }
 
         else if (inputTimer >= 31f)
         {
-            StartCoroutine(TappingFinger());
+            if (settings.isFirstLevel)
+                StartCoroutine(TappingFinger());
+            else
+                StartCoroutine(RotatingFinger());
             inputTimer = 0;
         }
     }
@@ -40,6 +46,13 @@ public class Finger : MonoBehaviour
         finger.SetActive(true);
         finger.GetComponent<Animator>().Play("MovingFinger");
         yield return new WaitForSeconds(3.5f);
+        finger.SetActive(false);
+    }
+
+    IEnumerator RotatingFinger()
+    {
+        finger.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
         finger.SetActive(false);
     }
 

@@ -63,16 +63,19 @@ public class Messages : MonoBehaviour
             fadeout.SetActive(false);
             settings.isPaused = false;
             pause.ShowUI();
-            settings.isUIVisible = true; 
+            settings.isUIVisible = true;
             settings.isLevelStart = false;
         }
-        else if (!settings.isLevelStart && settings.isGameWon)
+        else if (!settings.isLevelStart && settings.isLastLevel && !settings.isGameWon)
         {
+            pause.HideUI();
             button.interactable = false;
             StartCoroutine(TypeText(dutyText, new Color(0.3921569f, 0.5058824f, 1, 1f)));
+            settings.isGameWon = true;
         }
         else
         {
+            pause.HideUI();
             trans.NextLevel();
         }
     }
@@ -93,9 +96,7 @@ public class Messages : MonoBehaviour
                 fullText += i;
                 message.text = fullText;
                 if (i == '>')
-                {
                     isRichText = false;
-                }
             }
             else
             {

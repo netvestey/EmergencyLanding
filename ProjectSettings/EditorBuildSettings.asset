@@ -12,11 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/PlayingLevel.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/PlayingLevel2.unity
-    guid: db3567789bd568146af9df0b95a4ab53
+    path: Assets/Scenes/PlayingLevel 2.unity
+    guid: 76b3d958383f9bd4b9c2c40d183ec80f
   - enabled: 1
-    path: Assets/Scenes/PlayingLevel3.unity
-    guid: 2d4ede830f06130458443c11a7eea705
+    path: Assets/Scenes/PlayingLevel 3.unity
+    guid: ea50b6b02b88ddd49b5284e3bbaf3894
   - enabled: 1
     path: Assets/Scenes/Titles.unity
     guid: e20bd71da56d4904a93055bb9a3647fe

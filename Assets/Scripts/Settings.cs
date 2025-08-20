@@ -5,6 +5,7 @@ public class Settings : MonoBehaviour
 {
     public bool isPaused;
     public bool isUIVisible;
+    public bool isLevelWon; 
     public bool isGameWon;
     public bool isLevelStart;
     public bool isFirstLevel;

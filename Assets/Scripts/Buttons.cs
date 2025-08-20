@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Buttons : MonoBehaviour
 {
     public Settings settings;
+    public Pause pause;
     [SerializeField] private Image image;
 
     public GameObject buttonSound;
@@ -29,7 +30,7 @@ public class Buttons : MonoBehaviour
 
     public void Exit()
     {
-        void Finished()
+        static void Finished()
         {
             SceneManager.LoadScene("StartScreen");
         }
@@ -39,7 +40,7 @@ public class Buttons : MonoBehaviour
 
     public void NextLevel()
     {
-        void Finished()
+        static void Finished()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
@@ -49,9 +50,8 @@ public class Buttons : MonoBehaviour
 
     public void GoToTitles()
     {
-        void Finished()
+        static void Finished()
         {
-            settings.isPaused = false;
             SceneManager.LoadScene("Titles");
         }
 
@@ -60,9 +60,8 @@ public class Buttons : MonoBehaviour
 
     public void GoToDevs()
     {
-        void Finished()
+        static void Finished()
         {
-            settings.isPaused = false;
             SceneManager.LoadScene("Devs");
         }
 

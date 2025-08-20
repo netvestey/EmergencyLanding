@@ -1,8 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class Rotators : MonoBehaviour
-{   
+{
+    //private InputManager inputManager;
+
     private Camera cam;
     private Vector3 screenPos;
     private float angleOffset;
@@ -33,6 +36,64 @@ public class Rotators : MonoBehaviour
     public Hints hints;
 
     public Settings settings;
+
+    private void Awake()
+    {
+        //inputManager = InputManager.Instance;
+    }
+
+    private void OnEnable()
+    {
+        //inputManager.OnStartTouch += Rotate;
+    }
+
+    private void OnDisable()
+    {
+        //inputManager.OnEndTouch -= Rotate;
+    }
+
+    //public void Rotate(Vector2 screenPos, float time)
+    //{
+    //    Vector3 screenCoor = new (screenPos.x, screenPos.y, cam.nearClipPlane);
+    //    Vector3 touchPos = cam.ScreenToWorldPoint(screenCoor);
+    //    if (col == Physics2D.OverlapPoint(touchPos))
+    //    {
+    //        waveSound.Play();
+
+    //        angleOffset = (Mathf.Atan2(transform.right.y, transform.right.x) - Mathf.Atan2(touchPos.y, touchPos.x)) * Mathf.Rad2Deg;
+    //        float anglem = Mathf.Atan2(touchPos.y, touchPos.x) * Mathf.Rad2Deg;
+    //        transform.eulerAngles = new Vector3(0, 0, anglem + angleOffset);
+    //        progress = transform.eulerAngles.z / 360f * 2;
+    //        progress = Mathf.PingPong(progress, 1);
+
+
+    //        if (isAmpl)
+    //        {
+    //            sinewave.amplitude = Mathf.Lerp(minAmpl, maxAmpl, progress);
+    //            waveSound.pitch = Mathf.Lerp(maxPitch, minPitch, progress);
+
+    //            if (!hints.spawned.Contains(hints.ampl))
+    //            {
+    //                hints._text.text = hints.ampl;
+    //                hints.arrows.SetActive(true);
+    //                hints.spawned.Add(hints.ampl);
+    //            }
+    //        }
+
+    //        else
+    //        {
+    //            sinewave.frequency = Mathf.Lerp(maxFreq, minFreq, progress);
+    //            waveSound.reverbZoneMix = Mathf.Lerp(maxRev, minRev, progress);
+
+    //            if (!hints.spawned.Contains(hints.freq))
+    //            {
+    //                hints._text.text = hints.freq;
+    //                hints.arrows.SetActive(true);
+    //                hints.spawned.Add(hints.freq);
+    //            }
+    //        }
+    //    }
+    //}
 
     private void Start()
     {
@@ -110,9 +171,6 @@ public class Rotators : MonoBehaviour
 
         if (sinewave.amplitude > (desiredAmpl - 0.1f) && sinewave.amplitude < (desiredAmpl + 0.1f) && sinewave.frequency > (desiredFreq - 1f) && sinewave.frequency < (desiredFreq + 1f))
         {
-            if (settings.isLastLevel)
-                settings.isGameWon = true;
-
             StartCoroutine(HasWon());
         }
     }
@@ -120,6 +178,7 @@ public class Rotators : MonoBehaviour
     IEnumerator HasWon()
     {
         settings.isPaused = true;
+        settings.isLevelWon = true; 
 
         sinewave.frequency = Mathf.Lerp(sinewave.frequency, desiredFreq, 2 * Time.deltaTime);
         sinewave.amplitude = Mathf.Lerp(sinewave.amplitude, desiredAmpl, 2 * Time.deltaTime);

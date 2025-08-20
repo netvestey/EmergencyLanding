@@ -441,7 +441,6 @@ MonoBehaviour:
   frequency: 2
   xLimits: {x: -15, y: 5}
   movementSpeed: 3
-  settings: {fileID: 1946871015}
 --- !u!120 &335929246
 LineRenderer:
   serializedVersion: 2
@@ -2300,7 +2299,7 @@ Transform:
   m_GameObject: {fileID: 1323676737}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 652, y: 313, z: -19439.332}
+  m_LocalPosition: {x: 679, y: 316, z: 0}
   m_LocalScale: {x: 99.88271, y: 99.88271, z: 99.88271}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2363,7 +2362,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 30d01bb45af85e84d86cd635fba96f40, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.54901963}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2400,7 +2399,7 @@ Transform:
   m_GameObject: {fileID: 1421055722}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.93, y: 7.14, z: 0}
+  m_LocalPosition: {x: 15.67, y: 6.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2705,7 +2704,6 @@ MonoBehaviour:
   frequency: 1
   xLimits: {x: -15, y: 5}
   movementSpeed: 3
-  settings: {fileID: 1946871015}
 --- !u!120 &1484274833
 LineRenderer:
   serializedVersion: 2
@@ -3475,7 +3473,7 @@ Transform:
   m_GameObject: {fileID: 1937457445}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.049794797, w: 0.9987595}
-  m_LocalPosition: {x: -611, y: 347, z: -19439.332}
+  m_LocalPosition: {x: -679, y: 316, z: 0}
   m_LocalScale: {x: 99.88271, y: 99.88271, z: 99.88271}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3538,7 +3536,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: a1036327846941243828af497b7f5b69, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.54901963}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3580,7 +3578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
-  isLevelWon: 0
+  isUIVisible: 0
   isGameWon: 0
   isLevelStart: 1
   isFirstLevel: 0

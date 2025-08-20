@@ -7,9 +7,6 @@ using UnityEngine.UI;
 public class SceneTransition : MonoBehaviour
 {
     [SerializeField] private Image image;
-
-
-    //private static bool alreadyHasFadeImage;
     
     private void Start()
     {
@@ -18,7 +15,6 @@ public class SceneTransition : MonoBehaviour
         color.a = 1;
         image.color = color;
         StartCoroutine(ChangeAlpha(0.2f, 0, null));
-        //DontDestroyOnLoad(transform.parent.gameObject);
     }
     
     public void ChangeScene()
