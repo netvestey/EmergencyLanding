@@ -14,4 +14,12 @@ public class Settings : MonoBehaviour
     {
         Screen.SetResolution(3840, 2160, true);
     }
+
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 }
